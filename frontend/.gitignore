@@ -7,9 +7,28 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Environment variables
 .env
+.env.*
+!.env.example
 
-node_modules
+# Frontend
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+frontend/dist/
+
+# Testing
+.pytest_cache/
+
 dist
 dist-ssr
 *.local
