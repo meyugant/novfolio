@@ -14,6 +14,10 @@ class Settings(BaseSettings):
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int
 
+    GOOGLE_CLIENT_ID: str
+
+    CORS_ORIGINS: list[str]
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore"
