@@ -1,0 +1,24 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Backend environment
+backend/.env
+
+# Frontend environment
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+frontend/dist/
+
+# Pytest
+.pytest_cache/
