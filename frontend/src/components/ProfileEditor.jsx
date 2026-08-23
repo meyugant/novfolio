@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { createProfile, updateProfile } from "../api/profile";
+import { uploadImage } from "../api/upload";
 
 function ProfileEditor({ profile, onUpdated }) {
   const [form, setForm] = useState({
@@ -15,6 +16,7 @@ function ProfileEditor({ profile, onUpdated }) {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (profile) {
@@ -37,6 +39,33 @@ function ProfileEditor({ profile, onUpdated }) {
       ...form,
       [name]: value,
     });
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setUploading(true);
+    setError("");
+    setMessage("");
+
+    try {
+      const data = await uploadImage(file);
+
+      setForm({
+        ...form,
+        profile_image: data.url,
+      });
+
+      setMessage("Image uploaded successfully.");
+    } catch (error) {
+      console.error(error);
+
+      setError(error.response?.data?.detail || "Failed to upload image.");
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -217,17 +246,59 @@ function ProfileEditor({ profile, onUpdated }) {
             {/* Profile Image */}
             <div>
               <label className="mb-2 block text-sm font-medium text-slate-700">
-                Profile Image URL
+                Profile Image
               </label>
 
-              <input
-                type="url"
-                name="profile_image"
-                value={form.profile_image}
-                onChange={handleChange}
-                placeholder="https://example.com/image.jpg"
-                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-violet-400 focus:ring-2 focus:ring-violet-100"
-              />
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                {form.profile_image && (
+                  <div className="mb-4 flex items-center gap-4">
+                    <img
+                      src={form.profile_image}
+                      alt="Profile preview"
+                      className="h-20 w-20 rounded-full object-cover border border-slate-200"
+                    />
+
+                    <div>
+                      <p className="text-sm font-medium text-slate-700">
+                        Current profile image
+                      </p>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setForm({
+                            ...form,
+                            profile_image: "",
+                          })
+                        }
+                        className="mt-1 text-xs font-medium text-red-500 hover:text-red-600"
+                      >
+                        Remove image
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                <label
+                  htmlFor="profile-image-upload"
+                  className="flex cursor-pointer items-center justify-center rounded-lg border border-dashed border-slate-300 px-4 py-4 text-sm font-medium text-slate-600 transition hover:border-violet-400 hover:bg-violet-50 hover:text-violet-600"
+                >
+                  {uploading ? "Uploading..." : "Choose Profile Image"}
+                </label>
+
+                <input
+                  id="profile-image-upload"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={handleImageUpload}
+                  disabled={uploading}
+                  className="hidden"
+                />
+
+                <p className="mt-2 text-xs text-slate-400">
+                  JPG, PNG or WEBP. Maximum size: 5 MB.
+                </p>
+              </div>
             </div>
           </div>
         </div>

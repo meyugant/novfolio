@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DeleteConfirmModal from "./dashboard/DeleteConfirm";
+import { uploadImage } from "../api/upload";
 
 import {
   getProjects,
@@ -14,7 +15,7 @@ function ProjectManager() {
   const [loading, setLoading] = useState(true);
 
   const [error, setError] = useState("");
-
+  const [uploading, setUploading] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
   const [deleteId, setDeleteId] = useState(null);
@@ -56,6 +57,32 @@ function ProjectManager() {
       ...form,
       [name]: type === "checkbox" ? checked : value,
     });
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setUploading(true);
+    setError("");
+
+    try {
+      const data = await uploadImage(file);
+
+      setForm({
+        ...form,
+        image_url: data.url,
+      });
+    } catch (error) {
+      console.error(error);
+
+      setError(
+        error.response?.data?.detail || "Failed to upload project image.",
+      );
+    } finally {
+      setUploading(false);
+    }
   };
 
   const resetForm = () => {
@@ -324,17 +351,53 @@ function ProjectManager() {
           <div className="mt-5 grid gap-5 md:grid-cols-2">
             <div>
               <label className="mb-2 block text-sm font-medium text-slate-700">
-                Image URL
+                Project Image
               </label>
 
-              <input
-                type="url"
-                name="image_url"
-                value={form.image_url}
-                onChange={handleChange}
-                placeholder="https://example.com/project.jpg"
-                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-violet-400 focus:ring-2 focus:ring-violet-100"
-              />
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                {form.image_url && (
+                  <div className="mb-4">
+                    <img
+                      src={form.image_url}
+                      alt="Project preview"
+                      className="h-32 w-full rounded-lg object-cover border border-slate-200"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          image_url: "",
+                        })
+                      }
+                      className="mt-2 text-xs font-medium text-red-500 hover:text-red-600"
+                    >
+                      Remove image
+                    </button>
+                  </div>
+                )}
+
+                <label
+                  htmlFor="project-image-upload"
+                  className="flex cursor-pointer items-center justify-center rounded-lg border border-dashed border-slate-300 px-4 py-4 text-sm font-medium text-slate-600 transition hover:border-violet-400 hover:bg-violet-50 hover:text-violet-600"
+                >
+                  {uploading ? "Uploading..." : "Choose Project Image"}
+                </label>
+
+                <input
+                  id="project-image-upload"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={handleImageUpload}
+                  disabled={uploading}
+                  className="hidden"
+                />
+
+                <p className="mt-2 text-xs text-slate-400">
+                  JPG, PNG or WEBP. Maximum size: 5 MB.
+                </p>
+              </div>
             </div>
 
             <div>

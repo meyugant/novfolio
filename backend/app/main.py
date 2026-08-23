@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.api.upload import router as upload_router
 from app.api.auth import router as auth_router
 from app.api.portfolio import router as portfolio_router
 from app.config.settings import settings
@@ -35,6 +35,7 @@ app.include_router(experience_router)
 app.include_router(education_router)
 app.include_router(skill_router)
 app.include_router(social_link_router)
+app.include_router(upload_router)
 
 @app.get("/")
 def root():
