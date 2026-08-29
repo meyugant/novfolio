@@ -10,6 +10,7 @@ import {
   LogOut,
   Menu,
   X,
+  ExternalLink,
 } from "lucide-react";
 
 import { useState } from "react";
@@ -64,6 +65,8 @@ function DashboardSidebar({ activeSection, onSectionChange, user }) {
   const [loggingOut, setLoggingOut] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const slug = user?.portfolio?.slug;
+
   const handleLogout = () => {
     setLoggingOut(true);
 
@@ -82,39 +85,37 @@ function DashboardSidebar({ activeSection, onSectionChange, user }) {
 
   return (
     <>
-      {/* =====================================================
-          MOBILE / TABLET MENU BUTTON
-      ===================================================== */}
+      {/* MOBILE / TABLET MENU BUTTON */}
 
       <button
         type="button"
         onClick={() => setMobileOpen(true)}
-        className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 sm:left-5 sm:top-5 lg:hidden"
+        className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 sm:left-5 sm:top-5 lg:hidden"
         aria-label="Open navigation"
       >
         <Menu size={20} />
       </button>
 
-      {/* =====================================================
+      {/*
           MOBILE / TABLET OVERLAY
-      ===================================================== */}
+      */}
 
       {mobileOpen && (
         <button
           type="button"
           onClick={() => setMobileOpen(false)}
-          className="fixed inset-0 z-40 bg-slate-950/20 backdrop-blur-[2px] lg:hidden"
+          className="fixed inset-0 z-50 bg-slate-950/20 backdrop-blur-[2px] lg:hidden"
           aria-label="Close navigation"
         />
       )}
 
-      {/* =====================================================
+      {/* 
           SIDEBAR
-      ===================================================== */}
+       */}
 
       <aside
         className={`
-          fixed left-0 top-0 z-50 flex h-screen
+          fixed left-0 top-0 z-[60] flex h-screen
           w-[85vw] max-w-72
           flex-col
           border-r border-slate-200 bg-white
@@ -123,9 +124,9 @@ function DashboardSidebar({ activeSection, onSectionChange, user }) {
           ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
       >
-        {/* =====================================================
+        {/*
             LOGO
-        ===================================================== */}
+       */}
 
         <div className="flex h-20 shrink-0 items-center justify-between px-6 sm:px-8">
           <button
@@ -137,6 +138,7 @@ function DashboardSidebar({ activeSection, onSectionChange, user }) {
           </button>
 
           {/* Close button - mobile/tablet only */}
+
           <button
             type="button"
             onClick={() => setMobileOpen(false)}
@@ -147,9 +149,9 @@ function DashboardSidebar({ activeSection, onSectionChange, user }) {
           </button>
         </div>
 
-        {/* =====================================================
+        {/* 
             NAVIGATION
-        ===================================================== */}
+          */}
 
         <nav className="flex-1 overflow-y-auto px-4 py-5 sm:py-6">
           <div className="space-y-1">
@@ -178,9 +180,39 @@ function DashboardSidebar({ activeSection, onSectionChange, user }) {
           </div>
         </nav>
 
-        {/* =====================================================
+        {/*  
+            MOBILE VIEW PORTFOLIO
+             */}
+
+        {slug && (
+          <div className="shrink-0 px-4 pb-2 sm:hidden">
+            <a
+              href={`/${slug}`}
+              target="_blank"
+              rel="noreferrer"
+              className="
+                flex w-full items-center justify-center gap-2
+                rounded-xl
+                border border-violet-200
+                bg-violet-50
+                px-4 py-3
+                text-sm font-medium
+                text-violet-600
+                transition
+                hover:border-violet-300
+                hover:bg-violet-100
+              "
+            >
+              <span>View Portfolio</span>
+
+              <ExternalLink size={15} />
+            </a>
+          </div>
+        )}
+
+        {/*  
             LOGOUT
-        ===================================================== */}
+         */}
 
         <div className="shrink-0 p-4 sm:p-5">
           <button

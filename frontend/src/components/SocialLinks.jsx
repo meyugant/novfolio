@@ -149,26 +149,28 @@ function SocialLinks() {
           links.map((link) => (
             <div
               key={link.id}
-              className="flex items-center justify-between border border-gray-200 rounded-xl p-4"
+              className="flex w-full min-w-0 flex-col gap-4 rounded-xl border border-gray-200 p-4 sm:flex-row sm:items-center sm:justify-between"
             >
-              <div>
+              {/* Link information */}
+              <div className="min-w-0 flex-1">
                 <h3 className="font-medium text-gray-800">{link.platform}</h3>
 
                 <a
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-blue-600 hover:underline"
+                  className="block max-w-full break-all text-sm text-blue-600 hover:underline"
                 >
                   {link.url}
                 </a>
 
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="mt-1 text-xs text-gray-400">
                   Order: {link.display_order}
                 </p>
               </div>
 
-              <div className="flex gap-2">
+              {/* Buttons */}
+              <div className="flex shrink-0 gap-2">
                 <button
                   onClick={() => handleEdit(link)}
                   className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100"

@@ -53,7 +53,10 @@ function DashboardHeader({ user, activeSection, onSectionChange }) {
       ===================================================== */}
 
       <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-        {/* View Portfolio */}
+        {/* View Portfolio
+            Hidden on phones.
+            Available in the mobile sidebar instead.
+        */}
 
         <a
           href={`/${slug}`}
