@@ -24,9 +24,9 @@ function WelcomeSection({ portfolio, onEditProfile }) {
           lg:p-8
         "
       >
-        {/* =====================================================
+        {/* 
             WELCOME TEXT
-        ===================================================== */}
+        */}
 
         <div className="min-w-0">
           <p className="text-sm font-medium text-violet-600">
@@ -63,9 +63,9 @@ function WelcomeSection({ portfolio, onEditProfile }) {
           </p>
         </div>
 
-        {/* =====================================================
+        {/*
             ACTIONS
-        ===================================================== */}
+         */}
 
         <div className="flex w-full shrink-0 sm:w-auto">
           <button

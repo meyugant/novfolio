@@ -163,30 +163,6 @@ function ProjectManager() {
     });
   };
 
-  // const handleDelete = async (projectId) => {
-  //   const confirmed = window.confirm(
-  //     "Are you sure you want to delete this project?",
-  //   );
-
-  //   if (!confirmed) {
-  //     return;
-  //   }
-
-  //   try {
-  //     await deleteProject(projectId);
-
-  //     setProjects(
-  //       projects.filter(
-  //         (project) => (project.id || project.project_id) !== projectId,
-  //       ),
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-
-  //     setError(error.response?.data?.detail || "Unable to delete project.");
-  //   }
-  // };
-
   const confirmDelete = async () => {
     if (!deleteId) {
       return;

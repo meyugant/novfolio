@@ -49,7 +49,7 @@ function ContentOverview({ portfolio, onSectionChange }) {
       } added`,
       section: "education",
       icon: GraduationCap,
-      completed: (portfolio?.education?.length || 0) > 0,
+      completed: (portfolio?.educations?.length || 0) > 0,
     },
 
     {
@@ -85,9 +85,9 @@ function ContentOverview({ portfolio, onSectionChange }) {
         lg:p-8
       "
     >
-      {/* =====================================================
+      {/*
           HEADER
-      ===================================================== */}
+      */}
 
       <div className="flex flex-col gap-2">
         <div>
@@ -122,9 +122,9 @@ function ContentOverview({ portfolio, onSectionChange }) {
         </div>
       </div>
 
-      {/* =====================================================
+      {/*
           CONTENT GRID
-      ===================================================== */}
+ */}
 
       <div
         className="
@@ -157,9 +157,9 @@ function ContentOverview({ portfolio, onSectionChange }) {
                 sm:p-5
               "
             >
-              {/* =================================================
+              {/* 
                   ICON + STATUS
-              ================================================= */}
+               */}
 
               <div className="flex items-center justify-between">
                 <div
@@ -186,9 +186,9 @@ function ContentOverview({ portfolio, onSectionChange }) {
                 />
               </div>
 
-              {/* =================================================
+              {/* 
                   CONTENT
-              ================================================= */}
+              */}
 
               <h3 className="mt-5 text-sm font-semibold text-slate-950 sm:mt-6">
                 {item.title}
@@ -198,9 +198,9 @@ function ContentOverview({ portfolio, onSectionChange }) {
                 {item.description}
               </p>
 
-              {/* =================================================
+              {/* 
                   MANAGE BUTTON
-              ================================================= */}
+             */}
 
               <button
                 type="button"

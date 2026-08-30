@@ -38,9 +38,9 @@ function DashboardHeader({ user, activeSection, onSectionChange }) {
         lg:pl-8
       "
     >
-      {/* =====================================================
+      {/* 
           PAGE TITLE
-      ===================================================== */}
+      */}
 
       <div className="min-w-0">
         <h1 className="truncate text-base font-semibold tracking-tight text-slate-950 sm:text-lg">
@@ -48,16 +48,11 @@ function DashboardHeader({ user, activeSection, onSectionChange }) {
         </h1>
       </div>
 
-      {/* =====================================================
+      {/* 
           ACTIONS
-      ===================================================== */}
+       */}
 
       <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-        {/* View Portfolio
-            Hidden on phones.
-            Available in the mobile sidebar instead.
-        */}
-
         <a
           href={`/${slug}`}
           target="_blank"
