@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 
 function SEO({
-  title = "Novfolio – Create Your Professional Portfolio",
-  description = "Create a professional online portfolio with Novfolio. Showcase your projects, skills, education, and experience with a beautiful portfolio website.",
+  title = "Novfolio – Create a Professional Online Portfolio",
+  description = "Novfolio is a professional portfolio builder for students, developers, designers, researchers, and professionals. Create and share a portfolio showcasing your projects, skills, experience, and education.",
   canonical = "https://novfolio.com/",
   image = "https://novfolio.com/og-image.png",
   noIndex = false,
@@ -21,27 +21,18 @@ function SEO({
       <link rel="canonical" href={canonical} />
 
       {/* Open Graph */}
-
       <meta property="og:type" content="website" />
-
       <meta property="og:title" content={title} />
-
       <meta property="og:description" content={description} />
-
       <meta property="og:url" content={canonical} />
-
       <meta property="og:site_name" content="Novfolio" />
-
       <meta property="og:image" content={image} />
+      <meta property="og:locale" content="en_US" />
 
-      {/* Twitter */}
-
+      {/* Twitter / X */}
       <meta name="twitter:card" content="summary_large_image" />
-
       <meta name="twitter:title" content={title} />
-
       <meta name="twitter:description" content={description} />
-
       <meta name="twitter:image" content={image} />
     </Helmet>
   );

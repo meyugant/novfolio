@@ -5,95 +5,126 @@ import {
   GraduationCap,
   Code2,
   Share2,
+  ArrowUpRight,
 } from "lucide-react";
 
 function Features() {
   const features = [
     {
       icon: UserRound,
+      number: "01",
       title: "Professional Profile",
       description:
         "Create a clear professional profile with your name, bio, location, contact information, and profile image.",
     },
     {
       icon: FolderKanban,
-      title: "Showcase Your Projects",
+      number: "02",
+      title: "Projects",
       description:
-        "Highlight your best projects with descriptions, technologies, links, and the work you're most proud of.",
+        "Showcase your best work with project descriptions, technologies, images, and live or GitHub links.",
     },
     {
       icon: BriefcaseBusiness,
-      title: "Share Your Experience",
+      number: "03",
+      title: "Experience",
       description:
-        "Present your professional experience, roles, organizations, employment history, and achievements.",
+        "Present your roles, organizations, employment history, achievements, and professional journey.",
     },
     {
       icon: GraduationCap,
-      title: "Education & Background",
+      number: "04",
+      title: "Education",
       description:
-        "Display your education, degrees, institutions, fields of study, and academic achievements.",
+        "Highlight your degrees, institutions, fields of study, academic background, and achievements.",
     },
     {
       icon: Code2,
-      title: "Highlight Your Skills",
+      number: "05",
+      title: "Skills",
       description:
-        "Organize your technical and professional skills so visitors can quickly understand what you can do.",
+        "Organize your technical and professional skills so visitors can quickly understand your strengths.",
     },
     {
       icon: Share2,
-      title: "One Link to Share",
+      number: "06",
+      title: "Social Links",
       description:
-        "Share your professional portfolio with a single public URL that you can use anywhere.",
+        "Connect your GitHub, LinkedIn, and other important profiles from one professional portfolio.",
     },
   ];
 
   return (
     <section
       id="features"
-      className="relative bg-white px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28"
+      className="relative overflow-hidden bg-white px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32"
     >
-      <div className="mx-auto max-w-7xl">
+      {/* Subtle background glow */}
+      <div className="pointer-events-none absolute left-1/2 top-20 h-72 w-72 -translate-x-1/2 rounded-full bg-violet-100/40 blur-3xl" />
+
+      <div className="relative mx-auto max-w-7xl">
         {/* Section heading */}
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-600">
             Everything you need
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold tracking-[-0.04em] text-slate-950 sm:text-4xl lg:text-5xl">
-            Your professional story,
+          <h2 className="mt-4 text-3xl font-bold tracking-[-0.045em] text-slate-950 sm:text-4xl lg:text-5xl">
+            All the essential sections
             <br className="hidden sm:block" />
-            all in one place.
+            to tell your story.
           </h2>
 
-          <p className="mt-5 text-sm leading-6 text-slate-500 sm:text-base sm:leading-7">
-            Build an online portfolio that brings together your profile,
-            projects, experience, education, skills, and social links.
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-500 sm:text-base">
+            Novfolio gives you everything you need to create a complete and
+            professional portfolio — without having to build a website from
+            scratch.
           </p>
         </div>
 
-        {/* Features */}
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Feature grid */}
+        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => {
             const Icon = feature.icon;
 
             return (
               <div
-                key={feature.title}
-                className="group rounded-2xl border border-slate-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-violet-200 hover:shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-7"
+                key={feature.number}
+                className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-violet-200 hover:shadow-[0_20px_50px_rgba(15,23,42,0.07)] sm:p-7"
               >
+                {/* Number */}
+                <div className="absolute right-5 top-5 text-[10px] font-semibold tracking-widest text-slate-300 transition-colors duration-300 group-hover:text-violet-300">
+                  {feature.number}
+                </div>
+
                 {/* Icon */}
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-50 text-violet-600 transition duration-300 group-hover:bg-violet-600 group-hover:text-white">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-50 text-violet-600 transition-all duration-300 group-hover:bg-violet-600 group-hover:text-white">
                   <Icon size={20} strokeWidth={1.8} />
                 </div>
 
-                {/* Text */}
-                <h3 className="mt-6 text-base font-semibold text-slate-950 sm:text-lg">
-                  {feature.title}
-                </h3>
+                {/* Content */}
+                <div className="mt-7">
+                  <h3 className="text-lg font-semibold tracking-tight text-slate-950">
+                    {feature.title}
+                  </h3>
 
-                <p className="mt-2 text-sm leading-6 text-slate-500">
-                  {feature.description}
-                </p>
+                  <p className="mt-3 text-sm leading-6 text-slate-500">
+                    {feature.description}
+                  </p>
+                </div>
+
+                {/* Bottom arrow */}
+                <div className="mt-7 flex items-center text-xs font-medium text-slate-400 transition-colors duration-300 group-hover:text-violet-600">
+                  <span>Included with your portfolio</span>
+
+                  <ArrowUpRight
+                    size={14}
+                    className="ml-1 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </div>
+
+                {/* Hover accent */}
+                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-violet-500 transition-all duration-300 group-hover:w-full" />
               </div>
             );
           })}
