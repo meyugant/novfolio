@@ -11,6 +11,11 @@ from app.schemas.portfolio import (
 )
 from app.services.portfolio_service import PortfolioService
 
+from fastapi.responses import Response
+from xml.etree.ElementTree import Element, SubElement, tostring
+
+from app.models.portfolio import Portfolio
+
 
 router = APIRouter(
     prefix="/api/v1/portfolios",
@@ -161,3 +166,37 @@ def unpublish_portfolio(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=str(e)
         )
+
+@router.get("/sitemap.xml", include_in_schema=False)
+def get_sitemap(db: Session = Depends(get_db)):
+    portfolios = (
+        db.query(Portfolio.slug)
+        .filter(Portfolio.is_published.is_(True))
+        .all()
+    )
+
+    urlset = Element(
+        "urlset",
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    )
+
+    urls = ["https://novfolio.com/"]
+
+    for portfolio in portfolios:
+        if portfolio.slug:
+            urls.append(f"https://novfolio.com/{portfolio.slug}")
+
+    for url in urls:
+        url_element = SubElement(urlset, "url")
+        SubElement(url_element, "loc").text = url
+
+    xml_content = tostring(
+        urlset,
+        encoding="utf-8",
+        xml_declaration=True
+    )
+
+    return Response(
+        content=xml_content,
+        media_type="application/xml"
+    )
