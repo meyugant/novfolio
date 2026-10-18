@@ -1,8 +1,13 @@
 {
   "rewrites": [
     {
+      "source": "/sitemap.xml",
+      "destination": "https://api.novfolio.com/api/v1/portfolios/sitemap.xml"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
 }
+
