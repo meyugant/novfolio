@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
 function SEO({
-  title = "Novfolio – Create a Professional Online Portfolio",
+  title = "Novfolio – Create Your Professional Portfolio",
   description = "Novfolio is a professional portfolio builder for students, developers, designers, researchers, and professionals. Create and share a portfolio showcasing your projects, skills, experience, and education.",
   canonical = "https://novfolio.com/",
   image = "https://novfolio.com/og-image.png",
